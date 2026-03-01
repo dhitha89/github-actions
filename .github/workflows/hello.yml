@@ -2,9 +2,10 @@
 name: hello
 
 on: 
-  workflow_dispatch:
-  #push:
-  #  branches: [main]
+  push:
+    branches: [main]
+    paths: 
+      - '**.html'
 
 #These are jobs inside workflow
 jobs:
