@@ -1,313 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Sharmila Sait | DevOps Engineer</title>
-
+    <title>Sharmila Sait — Full Stack Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
     <style>
-
-        /* ======================
-           RESET
-        ====================== */
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family: "Inter", system-ui, sans-serif;
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0a0a0f;--bg2:#0f0f18;--surface:rgba(255,255,255,0.04);
+            --border:rgba(255,255,255,0.08);--amber:#f5a623;
+            --amber-dim:rgba(245,166,35,0.15);--amber-glow:rgba(245,166,35,0.06);
+            --white:#f0ede8;--muted:rgba(240,237,232,0.45);
+            --display:'Syne',sans-serif;--mono:'DM Mono',monospace
         }
-
-        html{
-            scroll-behavior:smooth;
+        html{scroll-behavior:smooth}
+        body{background:var(--bg);color:var(--white);font-family:var(--mono);cursor:none;overflow-x:hidden}
+        body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.4}
+        #cursor{position:fixed;width:10px;height:10px;background:var(--amber);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .15s ease}
+        #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(245,166,35,.5);border-radius:50%;pointer-events:none;z-index:9998}
+        #grid-canvas{position:fixed;inset:0;z-index:0;opacity:.35}
+        .container{max-width:1100px;margin:0 auto;padding:0 2.5rem;position:relative;z-index:2}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);border-bottom:1px solid var(--border);background:rgba(10,10,15,.7)}
+        .nav-logo{font-family:var(--display);font-weight:800;font-size:1.1rem;letter-spacing:-.02em;color:var(--amber);text-decoration:none}
+        .nav-links{display:flex;gap:2.5rem;list-style:none}
+        .nav-links a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+        .nav-links a:hover{color:var(--amber)}
+        #hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+        .hero-inner{padding-top:6rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;width:100%}
+        .hero-tag{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .2s forwards}
+        .hero-tag::before{content:'// ';opacity:.5}
+        h1{font-family:var(--display);font-size:clamp(3.5rem,7vw,6.5rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .35s forwards}
+        h1 .outline{color:transparent;-webkit-text-stroke:1.5px var(--amber)}
+        .hero-role{font-size:.85rem;color:var(--muted);line-height:1.9;margin-bottom:2.5rem;opacity:0;animation:fadeUp .8s .5s forwards}
+        .hero-role span{color:var(--amber);font-style:italic}
+        .hero-cta{display:flex;gap:1rem;opacity:0;animation:fadeUp .8s .65s forwards}
+        .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-decoration:none;border-radius:2px;transition:all .25s;cursor:none}
+        .btn-primary{background:var(--amber);color:var(--bg);font-weight:500}
+        .btn-primary:hover{background:#ffc04a;transform:translateY(-2px)}
+        .btn-ghost{border:1px solid var(--border);color:var(--muted)}
+        .btn-ghost:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-2px)}
+        .hero-visual{position:relative;height:420px;opacity:0;animation:fadeUp .8s .5s forwards}
+        .float-card{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.5rem;backdrop-filter:blur(10px);font-size:.75rem}
+        .float-card.c1{top:20px;left:0;width:260px;animation:floatA 6s ease-in-out infinite}
+        .float-card.c2{top:140px;right:0;width:240px;animation:floatB 7s ease-in-out infinite}
+        .float-card.c3{bottom:20px;left:40px;width:280px;animation:floatA 8s ease-in-out infinite}
+        .card-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
+        .card-label::before{content:'';width:6px;height:6px;background:var(--amber);border-radius:50%;display:inline-block}
+        .card-val{font-size:1.6rem;font-family:var(--display);font-weight:800;letter-spacing:-.02em}
+        .card-sub{font-size:.68rem;color:var(--muted);margin-top:.3rem}
+        .pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.6rem}
+        .pill{font-size:.62rem;padding:3px 10px;border:1px solid var(--border);border-radius:20px;color:var(--muted)}
+        section{padding:7rem 0;position:relative;z-index:2}
+        .sec-label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.8rem}
+        h2{font-family:var(--display);font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem}
+        #about .inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+        .about-text p{color:var(--muted);line-height:2;font-size:.85rem;margin-bottom:1rem}
+        .about-text p em{color:var(--amber);font-style:normal}
+        .terminal{background:#080810;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+        .tbar{background:#111120;padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+        .dot{width:10px;height:10px;border-radius:50%}
+        .tbody{padding:1.2rem 1.4rem;font-size:.75rem;line-height:2}
+        .tl{display:flex;gap:.6rem}
+        .tp{color:var(--amber)}.tc{color:#7dd3fc}.to{color:var(--muted);padding-left:1.4rem}.to.g{color:#86efac}
+        .tcursor{display:inline-block;width:8px;height:14px;background:var(--amber);vertical-align:middle;animation:blink 1s step-end infinite}
+        #skills{background:var(--bg2)}
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5px;margin-top:3rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+        .skill-card{background:var(--surface);padding:2rem;transition:background .25s;position:relative;overflow:hidden}
+        .skill-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+        .skill-card:hover::before{transform:scaleX(1)}
+        .skill-card:hover{background:var(--amber-glow)}
+        .skill-icon{font-size:1.8rem;margin-bottom:1rem;display:block}
+        .skill-name{font-family:var(--display);font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+        .skill-desc{font-size:.73rem;color:var(--muted);line-height:1.8}
+        .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:3rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+        .project-card{background:var(--surface);padding:2rem;display:flex;flex-direction:column;gap:.8rem;transition:background .25s}
+        .project-card:hover{background:var(--amber-dim)}
+        .project-num{font-size:.65rem;letter-spacing:.15em;color:var(--amber);opacity:.6}
+        .project-name{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.02em}
+        .project-desc{font-size:.73rem;color:var(--muted);line-height:1.8;flex:1}
+        .project-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+        .tag{font-size:.6rem;padding:2px 8px;background:var(--amber-dim);color:var(--amber);border-radius:2px;letter-spacing:.05em}
+        #contact{text-align:center;background:var(--bg2);border-top:1px solid var(--border)}
+        #contact h2{font-size:clamp(2.5rem,6vw,5rem)}
+        .contact-sub{color:var(--muted);font-size:.82rem;margin:1rem auto 3rem;max-width:440px;line-height:2}
+        .contact-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+        footer{padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);font-size:.68rem;color:var(--muted);position:relative;z-index:2}
+        .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes floatA{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+        @keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        @media(max-width:768px){
+            .hero-inner,#about .inner{grid-template-columns:1fr}
+            .hero-visual,.projects-grid{display:none}
+            .skills-grid{grid-template-columns:1fr 1fr}
+            nav{padding:1rem 1.5rem}
+            .nav-links{gap:1.2rem}
         }
-
-        /* ======================
-           ANIMATED BACKGROUND
-        ====================== */
-        body{
-            background: linear-gradient(-45deg,#0f172a,#1e293b,#111827,#0b1120);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            color:white;
-        }
-
-        @keyframes gradient{
-            0%{background-position:0% 50%;}
-            50%{background-position:100% 50%;}
-            100%{background-position:0% 50%;}
-        }
-
-        /* ======================
-           NAVBAR
-        ====================== */
-        nav{
-            position:fixed;
-            width:100%;
-            top:0;
-            padding:18px 60px;
-            backdrop-filter:blur(12px);
-            background:rgba(255,255,255,0.06);
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            z-index:1000;
-        }
-
-        nav a{
-            color:white;
-            text-decoration:none;
-            margin-left:25px;
-            transition:.3s;
-        }
-
-        nav a:hover{
-            color:#38bdf8;
-            transform:translateY(-2px);
-        }
-
-        /* ======================
-           SECTIONS
-        ====================== */
-        section{
-            min-height:100vh;
-            padding:120px 25px;
-            max-width:1200px;
-            margin:auto;
-        }
-
-        /* ======================
-           HERO
-        ====================== */
-        .hero{
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-        }
-
-        .hero h1{
-            font-size:60px;
-            font-weight:700;
-        }
-
-        .hero span{
-            color:#38bdf8;
-        }
-
-        .hero p{
-            margin-top:15px;
-            color:#cbd5e1;
-            font-size:18px;
-        }
-
-        .btn{
-            margin-top:30px;
-            padding:14px 28px;
-            background:#38bdf8;
-            border-radius:8px;
-            color:black;
-            text-decoration:none;
-            font-weight:bold;
-            transition:.3s;
-        }
-
-        .btn:hover{
-            transform:scale(1.05);
-        }
-
-        /* ======================
-           GLASS CARD
-        ====================== */
-        .card{
-            background:rgba(255,255,255,0.08);
-            backdrop-filter:blur(14px);
-            border:1px solid rgba(255,255,255,0.15);
-            border-radius:18px;
-            padding:25px;
-            transition:.3s;
-        }
-
-        .card:hover{
-            transform:translateY(-6px);
-            box-shadow:0 15px 40px rgba(0,0,0,.4);
-        }
-
-        /* ======================
-           GRID
-        ====================== */
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:25px;
-        }
-
-        /* ======================
-           SKILL BADGES
-        ====================== */
-        .badge{
-            display:inline-block;
-            background:#0ea5e9;
-            padding:8px 14px;
-            border-radius:50px;
-            margin:6px;
-            font-size:14px;
-        }
-
-        /* ======================
-           FLIP CARDS
-        ====================== */
-        .flip{
-            perspective:1000px;
-        }
-
-        .flip-inner{
-            position:relative;
-            width:100%;
-            height:200px;
-            transform-style:preserve-3d;
-            transition:.6s;
-        }
-
-        .flip:hover .flip-inner{
-            transform:rotateY(180deg);
-        }
-
-        .flip-front, .flip-back{
-            position:absolute;
-            width:100%;
-            height:100%;
-            backface-visibility:hidden;
-            border-radius:18px;
-            padding:20px;
-        }
-
-        .flip-front{
-            background:rgba(255,255,255,0.08);
-        }
-
-        .flip-back{
-            background:#38bdf8;
-            color:black;
-            transform:rotateY(180deg);
-        }
-
-        /* ======================
-           FOOTER
-        ====================== */
-        footer{
-            text-align:center;
-            padding:40px;
-            color:#94a3b8;
-        }
-
-        /* ======================
-           MOBILE
-        ====================== */
-        @media(max-width:700px){
-            .hero h1{
-                font-size:40px;
-            }
-            nav{
-                padding:15px 25px;
-            }
-        }
-
     </style>
 </head>
-
 <body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="grid-canvas"></canvas>
 
-<!-- NAV -->
 <nav>
-    <h3>sharmilasait.com</h3>
-    <div>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </div>
+    <a href="#" class="nav-logo">SS</a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://www.linkedin.com/in/sharmilasait/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <h1>Hello, I'm <span>Sharmila</span></h1>
-    <p>Full-Stack Developer → DevOps Engineer | Laravel • Docker • Kubernetes • CI/CD</p>
-    <a href="#projects" class="btn">View My Work</a>
+<section id="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div>
+                <p class="hero-tag">Available for freelance</p>
+                <h1>Sharmi<br><span class="outline">la Sait</span></h1>
+                <div class="hero-role">
+                    Full Stack PHP Developer<br>
+                    <span>Laravel Specialist</span> · DevOps Enthusiast · Freelancer
+                </div>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get in touch →</a>
+                    <a href="#projects" class="btn btn-ghost">See my work</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="float-card c1">
+                    <div class="card-label">Experience</div>
+                    <div class="card-val">5+</div>
+                    <div class="card-sub">Years building web products</div>
+                </div>
+                <div class="float-card c2">
+                    <div class="card-label">Stack</div>
+                    <div class="pills">
+                        <span class="pill">Laravel</span><span class="pill">PHP</span>
+                        <span class="pill">Vue.js</span><span class="pill">MySQL</span>
+                        <span class="pill">Docker</span><span class="pill">Nginx</span>
+                    </div>
+                </div>
+                <div class="float-card c3">
+                    <div class="card-label">Status</div>
+                    <div class="card-val" style="font-size:1rem;color:#86efac">● Open to projects</div>
+                    <div class="card-sub">sharmilasait.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
-    <h2>About Me</h2>
-    <div class="card">
-        <p>
-            I design scalable web applications and automate infrastructure using Docker,
-            Kubernetes and GitLab CI/CD. I enjoy building cloud-native systems,
-            optimizing deployments and integrating AI-powered solutions into Laravel apps.
-        </p>
+    <div class="container">
+        <div class="inner">
+            <div class="about-text reveal">
+                <p class="sec-label">01. About</p>
+                <h2>Building things<br>that <em>work</em>.</h2>
+                <p>I'm Sharmila — a Full Stack PHP developer specialising in <em>Laravel</em> and modern backend architecture. I care about clean code, fast deployments, and products people actually enjoy using.</p>
+                <p>Beyond the backend, I'm a <em>DevOps enthusiast</em> who enjoys containerising applications, writing CI pipelines, and automating everything that can be automated.</p>
+                <p>Available for freelance projects, consulting, and long-term contracts. Let's build something.</p>
+            </div>
+            <div class="terminal reveal">
+                <div class="tbar">
+                    <span class="dot" style="background:#ff5f57"></span>
+                    <span class="dot" style="background:#febc2e"></span>
+                    <span class="dot" style="background:#28c840"></span>
+                </div>
+                <div class="tbody">
+                    <div class="tl"><span class="tp">~$</span><span class="tc">whoami</span></div>
+                    <div class="to g">sharmila_sait</div><br>
+                    <div class="tl"><span class="tp">~$</span><span class="tc">cat role.txt</span></div>
+                    <div class="to">Full Stack PHP Developer</div>
+                    <div class="to">Laravel · DevOps · Freelancer</div><br>
+                    <div class="tl"><span class="tp">~$</span><span class="tc">ls skills/</span></div>
+                    <div class="to g">laravel/ php/ docker/ vue/ mysql/ nginx/</div><br>
+                    <div class="tl"><span class="tp">~$</span><span class="tc">echo $STATUS</span></div>
+                    <div class="to g">available_for_hire=true</div><br>
+                    <div class="tl"><span class="tp">~$</span><span class="tcursor"></span></div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
-    <h2>Skills</h2>
-
-    <div class="card">
-        <span class="badge">Laravel</span>
-        <span class="badge">PHP</span>
-        <span class="badge">Docker</span>
-        <span class="badge">Kubernetes</span>
-        <span class="badge">GitLab CI</span>
-        <span class="badge">Linux</span>
-        <span class="badge">Nginx</span>
-        <span class="badge">Vue</span>
-        <span class="badge">MySQL</span>
+    <div class="container">
+        <p class="sec-label reveal">02. Skills</p>
+        <h2 class="reveal">What I work with</h2>
+        <div class="skills-grid">
+            <div class="skill-card reveal"><span class="skill-icon">⚡</span><div class="skill-name">Laravel</div><div class="skill-desc">Scalable REST APIs, custom packages, event-driven systems, and full-stack apps with the full Laravel ecosystem.</div></div>
+            <div class="skill-card reveal"><span class="skill-icon">🐘</span><div class="skill-name">PHP</div><div class="skill-desc">Modern PHP — OOP, design patterns, performance optimisation, and legacy code modernisation.</div></div>
+            <div class="skill-card reveal"><span class="skill-icon">🐳</span><div class="skill-name">Docker & DevOps</div><div class="skill-desc">Containerising apps with Docker & Sail, CI/CD pipelines, and managing server infrastructure with confidence.</div></div>
+            <div class="skill-card reveal"><span class="skill-icon">🗃️</span><div class="skill-name">MySQL</div><div class="skill-desc">Schema design, query optimisation, migrations, and complex Eloquent ORM relationships.</div></div>
+            <div class="skill-card reveal"><span class="skill-icon">🖼️</span><div class="skill-name">Vue.js & Frontend</div><div class="skill-desc">Reactive UIs with Vue 3, Tailwind CSS, and Alpine.js — bridging backend and frontend seamlessly.</div></div>
+            <div class="skill-card reveal"><span class="skill-icon">🌐</span><div class="skill-name">WordPress</div><div class="skill-desc">Custom theme and plugin development, WooCommerce integrations, and site performance optimisation.</div></div>
+        </div>
     </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
-    <h2>Projects</h2>
-
-    <div class="grid">
-
-        <div class="flip">
-            <div class="flip-inner">
-                <div class="flip-front">Student Management System</div>
-                <div class="flip-back">Laravel + Docker + Kubernetes deployment</div>
+    <div class="container">
+        <p class="sec-label reveal">03. Projects</p>
+        <h2 class="reveal">Selected work</h2>
+        <div class="projects-grid reveal">
+            <div class="project-card">
+                <div class="project-num">001</div>
+                <div class="project-name">Funnel Factory</div>
+                <div class="project-desc">A modular lead-generation funnel platform built with Laravel, featuring package-based architecture and automated deployment workflows.</div>
+                <div class="project-tags"><span class="tag">Laravel</span><span class="tag">PHP</span><span class="tag">Docker</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-num">002</div>
+                <div class="project-name">Provisit App</div>
+                <div class="project-desc">Full-stack web application with complex multi-step forms, payment integrations, and SEPA direct debit workflows.</div>
+                <div class="project-tags"><span class="tag">Laravel</span><span class="tag">Alpine.js</span><span class="tag">Tailwind</span></div>
+            </div>
+            <div class="project-card">
+                <div class="project-num">003</div>
+                <div class="project-name">CI/CD Pipeline</div>
+                <div class="project-desc">GitHub Actions deployment pipeline for a Laravel monorepo with multi-package architecture and automated versioning.</div>
+                <div class="project-tags"><span class="tag">GitHub Actions</span><span class="tag">Docker</span><span class="tag">Nginx</span></div>
             </div>
         </div>
-
-        <div class="flip">
-            <div class="flip-inner">
-                <div class="flip-front">GitLab CI Pipelines</div>
-                <div class="flip-back">Automated build, test, deploy</div>
-            </div>
-        </div>
-
-        <div class="flip">
-            <div class="flip-inner">
-                <div class="flip-front">AI Chatbot</div>
-                <div class="flip-back">Laravel + Ollama + PDF RAG system</div>
-            </div>
-        </div>
-
     </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-    <h2>Let's Connect</h2>
-    <div class="card">
-        <p>Email: sharmila@example.com</p>
-        <p>GitHub: github.com/yourusername</p>
-        <p>LinkedIn: linkedin.com/in/yourusername</p>
+    <div class="container">
+        <p class="sec-label reveal">04. Contact</p>
+        <h2 class="reveal">Let's work<br>together.</h2>
+        <p class="contact-sub reveal">Have a project in mind? I'm currently available for freelance work and always open to interesting opportunities.</p>
+        <div class="contact-links reveal">
+            <a href="https://www.sharmilasait.com/contact.html" class="btn btn-primary">Send a message →</a>
+            <a href="https://www.linkedin.com/in/sharmilasait/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+        </div>
     </div>
 </section>
 
 <footer>
-    © 2026 Sharmila Sait • Built with HTML & CSS
+    <span>© 2025 Sharmila Sait</span>
+    <span>Full Stack Developer · Laravel Specialist</span>
 </footer>
 
+<script>
+    // Cursor
+    const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+    let mx=0,my=0,rx=0,ry=0;
+    document.addEventListener('mousemove',e=>{
+        mx=e.clientX;my=e.clientY;
+        cursor.style.cssText=`left:${mx}px;top:${my}px;transform:translate(-50%,-50%)`;
+    });
+    (function loop(){
+        rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+        ring.style.cssText=`left:${rx}px;top:${ry}px;transform:translate(-50%,-50%)`;
+        requestAnimationFrame(loop);
+    })();
+    document.querySelectorAll('a,button').forEach(el=>{
+        el.addEventListener('mouseenter',()=>cursor.style.transform='translate(-50%,-50%) scale(2.5)');
+        el.addEventListener('mouseleave',()=>cursor.style.transform='translate(-50%,-50%) scale(1)');
+    });
+
+    // Grid
+    const cv=document.getElementById('grid-canvas'),cx=cv.getContext('2d');
+    function drawGrid(){
+        cv.width=window.innerWidth;cv.height=window.innerHeight;
+        const W=cv.width,H=cv.height,s=60;
+        cx.strokeStyle='rgba(245,166,35,0.07)';cx.lineWidth=.5;
+        for(let x=0;x<=W;x+=s){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,H);cx.stroke()}
+        for(let y=0;y<=H;y+=s){cx.beginPath();cx.moveTo(0,y);cx.lineTo(W,y);cx.stroke()}
+        cx.fillStyle='rgba(245,166,35,0.2)';
+        for(let x=0;x<=W;x+=s)for(let y=0;y<=H;y+=s){cx.beginPath();cx.arc(x,y,1.2,0,Math.PI*2);cx.fill()}
+    }
+    window.addEventListener('resize',drawGrid);drawGrid();
+
+    // Scroll reveal
+    new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12})
+        .observe=function(el){IntersectionObserver.prototype.observe.call(this,el)};
+    const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+    // Text scramble on h2 hover
+    const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+    document.querySelectorAll('h2').forEach(el=>{
+        const orig=el.innerHTML;
+        el.addEventListener('mouseenter',()=>{
+            let i=0;
+            const iv=setInterval(()=>{
+                el.innerText=orig.replace(/<[^>]+>/g,'').split('').map((c,idx)=>{
+                    if(idx<i||c==='\n')return c;
+                    return chars[Math.floor(Math.random()*chars.length)];
+                }).join('');
+                if(i++>orig.replace(/<[^>]+>/g,'').length){el.innerHTML=orig;clearInterval(iv)}
+            },28);
+        });
+    });
+</script>
 </body>
 </html>
