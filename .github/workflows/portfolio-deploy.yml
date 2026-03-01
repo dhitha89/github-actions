@@ -32,6 +32,6 @@ jobs:
         with:
           path:"."
 
-      # deploy
+      # deploy the code to github
       - name: Deploy to github pages
         uses: actions/deploy-pages@v4
