@@ -1,0 +1,25 @@
+# this is nam eof the workflow that will b edisplayed in actions tab
+name: cICD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        run: echo "COde Clone from"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build container
+        run: echo "build container"
+        
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy container
+        run: echo "deploy container"
+  
