@@ -12,12 +12,21 @@ jobs:
         run: echo "COde Clone from"
 
   build:
+    needs: [code]
     runs-on: ubuntu-latest
     steps:
       - name: Build container
         run: echo "build container"
+
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test container
+        run: echo "test container"
         
   deploy:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy container
