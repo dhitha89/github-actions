@@ -36,7 +36,8 @@ jobs:
         run: echo "test container"
         
   deploy:
-    needs: [test]
+    if: inputs.environment == 'dev'
+    needs: [build,test]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy container
