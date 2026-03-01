@@ -1,0 +1,18 @@
+# This is workflow name
+name: display version
+
+on: 
+  push:
+    branches: [main]
+
+#These are jobs inside workflow
+jobs:
+  #This is teh name of the job
+  tool_version:
+    #This is runner on which job runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: show tools versions 
+        run: |
+          docker --version
+          python --version
