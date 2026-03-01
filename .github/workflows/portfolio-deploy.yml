@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   pages: write
@@ -28,6 +29,8 @@ jobs:
       # static code artifacts
       - name: Upload static files
         uses: actions/upload-pages-artifact@v4
+        with:
+          path:"."
 
       # deploy
       - name: Deploy to github pages
