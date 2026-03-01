@@ -2,65 +2,230 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sharmila Sait | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sharmila Sait | DevOps Portfolio</title>
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            scroll-behavior: smooth;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        nav {
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.08);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav h2 {
+            font-weight: 600;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+        section {
+            padding: 90px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+        .hero {
+            text-align: center;
+            padding-top: 120px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #cbd5e1;
+        }
+
+        /* =========================
+           GLASS CARD
+        ========================= */
+        .card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 25px;
+            margin: 15px 0;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* =========================
+           GRID
+        ========================= */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+        .btn {
+            background: #38bdf8;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0ea5e9;
+            transform: scale(1.05);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+        }
+    </style>
 </head>
 
-<body style="font-family: Arial, sans-serif; margin:0; background:#f5f5f5;">
+<body>
 
-<!-- Header -->
-<header style="background:#222; color:white; padding:30px; text-align:center;">
-    <h1 style="margin:0;">Sharmila Sait</h1>
-    <p>Full Stack Developer → DevOps Engineer</p>
-</header>
-
-<!-- About -->
-<section style="padding:40px; background:white;">
-    <h2>About Me</h2>
-    <p>
-        I am a Full Stack Developer transitioning into DevOps.
-        I enjoy building Laravel apps, Docker containers,
-        Kubernetes deployments, and CI/CD pipelines.
-    </p>
-</section>
-
-<!-- Skills -->
-<section style="padding:40px;">
-    <h2>Skills</h2>
+<!-- NAVBAR -->
+<nav>
+    <h2>Sharmila.dev</h2>
     <ul>
-        <li>Laravel / PHP</li>
-        <li>JavaScript / Vue</li>
-        <li>Docker & Kubernetes</li>
-        <li>GitLab CI/CD</li>
-        <li>Linux & Nginx</li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
     </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Hi, I'm Sharmila 👋</h1>
+    <p>Full Stack Developer → DevOps Engineer</p>
 </section>
 
-<!-- Projects -->
-<section style="padding:40px; background:white;">
+<!-- ABOUT -->
+<section id="about">
+    <h2>About Me</h2>
+    <div class="card">
+        <p>
+            I build scalable Laravel applications and automate deployments using Docker,
+            Kubernetes and CI/CD pipelines. Currently transitioning fully into DevOps
+            engineering with a focus on cloud infrastructure and automation.
+        </p>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <h2>Skills</h2>
+
+    <div class="grid">
+        <div class="card">Laravel / PHP</div>
+        <div class="card">Docker & Kubernetes</div>
+        <div class="card">GitLab CI/CD</div>
+        <div class="card">Linux & Nginx</div>
+        <div class="card">Vue / JavaScript</div>
+        <div class="card">MySQL / PostgreSQL</div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
     <h2>Projects</h2>
 
-    <h3>Student Management System</h3>
-    <p>Laravel app containerized with Docker and deployed to Kubernetes.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>Student Management System</h3>
+            <p>Laravel app containerized with Docker and deployed on Kubernetes.</p>
+        </div>
 
-    <h3>WordPress Gutenberg Plugin</h3>
-    <p>Custom Vue-powered Gutenberg block for dynamic content rendering.</p>
+        <div class="card">
+            <h3>WordPress Gutenberg Plugin</h3>
+            <p>Vue powered dynamic block with custom backend integration.</p>
+        </div>
 
-    <h3>DevOps Automation</h3>
-    <p>CI/CD pipelines using GitLab for automated testing and deployment.</p>
+        <div class="card">
+            <h3>DevOps Pipelines</h3>
+            <p>Automated testing, build & deploy using GitLab CI.</p>
+        </div>
+    </div>
 </section>
 
-<!-- Contact -->
-<section style="padding:40px;">
+<!-- CONTACT -->
+<section id="contact">
     <h2>Contact</h2>
-    <p>Email: sharmila@example.com</p>
-    <p>GitHub: github.com/yourusername</p>
-    <p>LinkedIn: linkedin.com/in/yourusername</p>
+
+    <div class="card">
+        <p>Email: sharmila@example.com</p>
+        <p>GitHub: github.com/yourusername</p>
+        <p>LinkedIn: linkedin.com/in/yourusername</p>
+        <br>
+        <a class="btn" href="#">Hire Me</a>
+    </div>
 </section>
 
-<!-- Footer -->
-<footer style="background:#222; color:white; text-align:center; padding:20px;">
-    © 2026 Sharmila Sait
+<footer>
+    © 2026 Sharmila Sait • Built with HTML & CSS
 </footer>
 
 </body>
